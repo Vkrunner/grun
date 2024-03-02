@@ -8,18 +8,18 @@ app = Flask(__name__)
 history = []
 
 @app.route('/compute', methods=['POST'])
+
 def compute_sums():
-    data = request.get_json()
-    spreadsheet = data.get('spreadsheet', [])
-    row_sums = [sum(row) for row in spreadsheet]
-    response = ({'row_sums': row_sums})
+    data            = request.get_json()
+    spreadsheet     = data.get('spreadsheet', [])
+    row_sums        = [sum(row) for row in spreadsheet]
+    response        = ({'row_sums': row_sums})
 
     history.append({
-        'time':datetime.now().strftime('%Y-%M-%D %H:%M:%S'),
-        'request': json.dumps(data, indent=4),
-        'response': json.dumps(response, indent=4)
+        'time'      :  datetime.now().strftime('%Y-%M-%D %H:%M:%S'),
+        'request'   :  json.dumps(data, indent=4),
+        'response'  :  json.dumps(response, indent=4)
     })
-
 
     return jsonify(response)
 
@@ -28,11 +28,6 @@ def compute_sums():
 def show_history():
     return render_template('history.html', history=history)
 
-
-
-
-# if __name__ == '__main__':
-#     app.run('0.0.0.0', debug=True, port=5000)
 
 if __name__ == "__main__":
     port = os.environ.get('PORT', 5000)

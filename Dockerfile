@@ -3,6 +3,7 @@ WORKDIR /app
 RUN python3 -m pip install --upgrade pip
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-EXPOSE 5000
+EXPOSE $PORT
+ENV PORT=5000
 COPY . /app
 CMD [ "python3","app.py" ]

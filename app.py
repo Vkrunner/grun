@@ -14,9 +14,10 @@ def compute_sums():
     spreadsheet     = data.get('spreadsheet', [])
     row_sums        = [sum(row) for row in spreadsheet]
     response        = ({'row_sums': row_sums})
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     history.append({
-        'time'      :  datetime.now().strftime('%Y-%M-%D %H:%M:%S'),
+        'time'      :  now,
         'request'   :  json.dumps(data, indent=4),
         'response'  :  json.dumps(response, indent=4)
     })
